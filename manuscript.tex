@@ -1,0 +1,197 @@
+% Init doc class
+\documentclass[twocolumn]{article}
+
+% Package Imports
+\usepackage{arxiv}
+\usepackage[utf8]{inputenc}             % Allow utf-8 input
+\usepackage[T1]{fontenc}                % Use 8-bit T1 fonts
+\usepackage{url}                        % Simple URL typesetting
+\usepackage{svg}                        % Include SVG Images
+\usepackage{booktabs}                   % Professional-quality tables
+\usepackage{amsfonts}                   % Math fonts
+\usepackage{amsmath}                    % Math symbols
+\usepackage{braket}                     % Dirac notation
+\usepackage{nicefrac}                   % Compact symbols for 1/2, etc.
+\usepackage[letterspace=24]{microtype}  % Microtypography
+\usepackage[multiple]{footmisc}         % Commas between consecutive footnotes
+\usepackage[labelfont=bf]{caption}      % Captions
+\usepackage{graphicx}                   % Graphics
+\usepackage{cuted}                      % Span tcolorbox across both columns
+\usepackage[framemethod=tikz]{mdframed} % Shadows for tcolorbox
+\usetikzlibrary{shadows}
+\usepackage{tabularx}                   % Tables
+\usepackage{rotating}                   % Table rotations
+\usepackage{chngpage}                   % Change page layouts in middle of document
+\usepackage{enumitem}                   % Custom lists
+\usepackage[font=small]{caption}        % Caption
+\usepackage{hyperref}                   % Hyperlinks
+
+% Doc Setup
+\graphicspath{{./figures/}}             % Set path to image folder for figures
+\setlength{\columnsep}{0.75cm}          % Text column separation for two page layout
+\setlength{\tabcolsep}{4pt}             % Table left right padding
+\renewcommand{\arraystretch}{1.2}       % Table Vertical 
+\def\note#1{\textbf{\color{red}[#1]}}   % Add a red note
+
+% box colors
+\definecolor{box-color-inner}{cmyk}{0.38, 0.16, 0.0, 0.0}
+\definecolor{box-color-shadow}{cmyk}{0.0, 0.2, 0.0, 0.04}
+
+\mdfsetup{
+    shadow              = true,
+    shadowsize          = 6pt,
+    shadowcolor         = box-color-shadow,
+    backgroundcolor     = box-color-inner,
+    linewidth           = 0pt,
+    rightmargin         = 6pt,
+    innertopmargin      = 12pt,
+    innerbottommargin   = 12pt,
+    innerleftmargin     = 12pt,
+    innerrightmargin    = 12pt
+}
+
+\title{A titillating title}
+
+% Authors
+\author{ 
+    \href{https://orcid.org/ADD-ORCID-ID-HERE}{\includegraphics[scale=0.06]{icons/orcid.pdf}\hspace{1mm}First I. ~Last} \inst{1},
+	\href{https://orcid.org/ADD-ORCID-ID-HERE}{\includegraphics[scale=0.06]{icons/orcid.pdf}\hspace{1mm}Second I. Last} \inst{2,}, 
+	\href{https://orcid.org/ADD-ORCID-ID-HERE}{\includegraphics[scale=0.06]{icons/orcid.pdf}\hspace{1mm}Third I. Last} \inst{1, 2}, 
+}
+
+% Institutions
+\institute{
+    Department of Medical Informatics \& Clinical Epidemiology, Oregon Health \& Science University, Portland, OR 97202, USA
+    \and
+    Knight Cancer Institute, Oregon Health \& Science University, Portland, OR 97202, USA
+}
+
+% Corresponding Authors
+\contact{cordier@ohsu.edu}
+
+\begin{document}
+
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+    This is an abstract.
+    \end{abstract}
+    % keywords can be removed
+    \keywords{key \and words \and for \and the \and bots}
+    \vspace{8pt}
+  \end{@twocolumnfalse}
+]
+
+\raggedright
+
+\section{Introduction}
+\label{sec:introduction}
+
+We can have sections. It's nice to give them a label so you can reference them like a Table or Figure, for example, see \textbf{Section \ref{sec:introduction}}.
+
+\subsection{Subsections}
+Subsections.
+
+\subsubsection{Subsubsections}
+Subsubsections. 
+
+\textbf{Sometimes I bold the first clause for a subsubsubsection!} Just like that. 
+
+\subsection{Paragraphs, footnotes, and citations}
+
+This is a paragraph!
+
+This is another paragraph! With a footnote!%
+\footnote{This is a sassy little footnote.}.
+
+This is a citation \cite{CSG+22}. Checkout the references.bib file for a .bibtex entry and note the citation key. For multiple citations, string then together with a comma. 
+
+\subsection{Equations}
+
+Here's a standalone equation for the Gaussian kernel function:
+
+\begin{equation}
+    \mathbf{K}(x,x') = e^{-\gamma \| x-x' \|^2},
+\end{equation}
+
+which is a special case of the radial basis function kernel where the hyperparameter $\gamma = \sigma^{-2}$ is fixed. Note the inline equations. 
+
+\subsection{Figures and tables}
+
+\subsubsection{A figure}
+Here's a figure! Sometimes you'll want to reference them, like this one, (\textbf{Figure \ref{fig:srna-positive-controls}})
+
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{"srna-positive-control".png}
+    \caption[An artificial QML advantage]{\textbf{An artificial QML advantage.} Some squiggly lines.}
+    \label{fig:srna-positive-controls}
+\end{figure*}
+
+\subsubsection{A table}
+
+Tables are a bit more verbose...
+
+\begin{table*}[!ht]
+    \centering
+    \begin{tabularx}{\textwidth}{
+        >{\raggedright\arraybackslash}p{.25\textwidth}
+        >{\raggedright\arraybackslash}p{.20\textwidth}
+        >{\raggedright\arraybackslash}p{.50\textwidth}
+    }
+        \toprule \\
+        \textbf{Hyperparameter} & \textbf{Value} & \textbf{Description} \\
+        \\ \hline \\
+        Number of circuits & 100 & The number of gate sequences in the population. \\
+        \vspace{0pt} \\
+        Number of gates & 37 & The maximum parametric gate depth. In this case, defined by $n^2 + 1$, where $n = 6$ is the number of data encoding qubits in the circuits.  \\
+        \vspace{0pt} \\
+        Number of unitaries & $|G|=60$ & The product of the number of data encoding gates, but the number of parameterized gates, by the number of qubits.\\
+        \vspace{0pt} \\
+        Unitary parameter scaling & $\gamma = 2\pi$ & The value to scale gate parameters by (\textit{i.e.} in the interval $[0,\gamma]$.  \\
+        \vspace{0pt} \\
+        Number of generations & $25$ & Number of generations to optimize for. \\
+        \vspace{0pt} \\
+        Mutation probability & $0.25$ & The probability that an individual gate in the gate sequence is mutated by the mutation operator. \\
+        \vspace{0pt} \\
+        Selection pressure & $6$ & A scaling factor for the re-scaled fitness scores for which the softmax function is applied. \\
+        \vspace{0pt} \\
+        Max seed circuits & $3000$ & The maximum number of gate sequences to generate when attempting to build the population cache. \\
+        \vspace{0pt} \\
+        Seed circuits & $\text{TRUE}$ & Whether to seed the population of gate sequences or use ones randomly generated.\\
+        \vspace{0pt} \\
+        Fitness function & $\text{MSE}=\frac{1}{n}\sum_{i=1}^n(y-\hat{y})^2$ & The fitness function minimized, in this case mean squared error.\\
+        \vspace{0pt} \\
+        \bottomrule
+    \end{tabularx}
+    \vspace{12pt}
+    \caption[Genetic algorithm hyperparameters and parameterization]{\textbf{Genetic algorithm hyperparameters and parameterization.} A variety of mechanics were included in the genetic algorithm to facilitate the optimization of the quantum data embedding circuits. Due to computational constraints, the number of generations was limited to 25. A circuit depth of $n^2$ ensured that any final circuit would be readily implementable by the majority of available quantum hardware. However, note that with higher qubit counts, a depth proportional to $n^2$ would likely be infeasible.}
+    \label{table:genetic-algorithm-hyperparameters}
+\end{table*}
+
+\section{Background}
+
+\section{Methods}
+
+\section{Results}
+
+\section{Discussion}
+
+\subsection{Limitations}
+
+\subsection{Future directions}
+
+\section*{Acknowledgements}
+
+I'd like to acknowledge that when you put an asterisk after a section command it doesn't get numbered, which can be pretty handy. 
+
+\bibliographystyle{unsrt}  
+\bibliography{references}
+\clearpage
+
+% Uncomment the line below to include a supplemental i.e. supplemental.tex)
+% \include{supplemental}
+\clearpage
+
+\end{document}

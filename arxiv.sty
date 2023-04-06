@@ -1,0 +1,656 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProcessOptions\relax
+
+% fonts
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+
+% set page geometry
+\usepackage[verbose=true,letterpaper]{geometry}
+\AtBeginDocument{
+  \newgeometry{
+    textheight=9in,
+    textwidth=6.5in,
+    top=1in,
+    headheight=14pt,
+    headsep=25pt,
+    footskip=30pt
+  }
+}
+
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+\sloppy
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyheadoffset{0pt}
+\rhead{\scshape} % Add \today arg to \rhead{} for date in header
+\cfoot{\thepage}
+
+%Handling Keywords
+\def\keywordname{{\bfseries \emph Keywords}}%
+\def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
+\def\and{\ifhmode\unskip\nobreak\fi\ $\cdot$
+}\noindent\keywordname\enspace\ignorespaces#1\par\vskip 28pt}}
+
+% font sizes with reduced leading
+\renewcommand{\normalsize}{%
+  \@setfontsize\normalsize\@xpt\@xipt
+  \abovedisplayskip      7\p@ \@plus 2\p@ \@minus 5\p@
+  \abovedisplayshortskip \z@ \@plus 3\p@
+  \belowdisplayskip      \abovedisplayskip
+  \belowdisplayshortskip 4\p@ \@plus 3\p@ \@minus 3\p@
+}
+\normalsize
+\renewcommand{\small}{%
+  \@setfontsize\small\@ixpt\@xpt
+  \abovedisplayskip      6\p@ \@plus 1.5\p@ \@minus 4\p@
+  \abovedisplayshortskip \z@  \@plus 2\p@
+  \belowdisplayskip      \abovedisplayskip
+  \belowdisplayshortskip 3\p@ \@plus 2\p@   \@minus 2\p@
+}
+\renewcommand{\footnotesize}{\@setfontsize\footnotesize\@ixpt\@xpt}
+\renewcommand{\scriptsize}{\@setfontsize\scriptsize\@viipt\@viiipt}
+\renewcommand{\tiny}{\@setfontsize\tiny\@vipt\@viipt}
+\renewcommand{\large}{\@setfontsize\large\@xiipt{14}}
+\renewcommand{\Large}{\@setfontsize\Large\@xivpt{16}}
+\renewcommand{\LARGE}{\@setfontsize\LARGE\@xviipt{20}}
+\renewcommand{\huge}{\@setfontsize\huge\@xxpt{23}}
+\renewcommand{\Huge}{\@setfontsize\Huge\@xxvpt{28}}
+
+% sections with less space
+\providecommand{\section}{}
+\renewcommand{\section}{%
+  \@startsection{section}{1}{\z@}%
+                {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
+                { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
+                {\large\bf\raggedright}%
+}
+\providecommand{\subsection}{}
+\renewcommand{\subsection}{%
+  \@startsection{subsection}{2}{\z@}%
+                {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
+                { 0.8ex \@plus  0.2ex}%
+                {\normalsize\bf\raggedright}%
+}
+\providecommand{\subsubsection}{}
+\renewcommand{\subsubsection}{%
+  \@startsection{subsubsection}{3}{\z@}%
+                {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
+                { 0.5ex \@plus  0.2ex}%
+                {\normalsize\bf\raggedright}%
+}
+\providecommand{\paragraph}{}
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}{\z@}%
+                {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+                {-1em}%
+                {\normalsize\bf}%
+}
+\providecommand{\subparagraph}{}
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{\z@}%
+                {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+                {-1em}%
+                {\normalsize\bf}%
+}
+\providecommand{\subsubsubsection}{}
+\renewcommand{\subsubsubsection}{%
+  \vskip5pt{\noindent\normalsize\rm\raggedright}%
+}
+
+% float placement
+\renewcommand{\topfraction      }{0.85}
+\renewcommand{\bottomfraction   }{0.4}
+\renewcommand{\textfraction     }{0.1}
+\renewcommand{\floatpagefraction}{0.7}
+
+\newlength{\@abovecaptionskip}\setlength{\@abovecaptionskip}{7\p@}
+\newlength{\@belowcaptionskip}\setlength{\@belowcaptionskip}{\z@}
+
+\setlength{\abovecaptionskip}{\@abovecaptionskip}
+\setlength{\belowcaptionskip}{\@belowcaptionskip}
+
+% swap above/belowcaptionskip lengths for tables
+\renewenvironment{table}
+  {\setlength{\abovecaptionskip}{\@belowcaptionskip}%
+   \setlength{\belowcaptionskip}{\@abovecaptionskip}%
+   \@float{table}}
+  {\end@float}
+
+% footnote formatting
+\setlength{\footnotesep }{6.65\p@}
+\setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
+\renewcommand{\footnoterule}{\kern-3\p@ \hrule width 12pc \kern 2.6\p@}
+\setcounter{footnote}{0}
+
+% paragraph formatting
+\setlength{\parindent}{\z@}
+\setlength{\parskip  }{5.5\p@}
+
+% list formatting
+\setlength{\topsep       }{4\p@ \@plus 1\p@   \@minus 2\p@}
+\setlength{\partopsep    }{1\p@ \@plus 0.5\p@ \@minus 0.5\p@}
+\setlength{\itemsep      }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+\setlength{\parsep       }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+\setlength{\leftmargin   }{3pc}
+\setlength{\leftmargini  }{\leftmargin}
+\setlength{\leftmarginii }{2em}
+\setlength{\leftmarginiii}{1.5em}
+\setlength{\leftmarginiv }{1.0em}
+\setlength{\leftmarginv  }{0.5em}
+\def\@listi  {\leftmargin\leftmargini}
+\def\@listii {\leftmargin\leftmarginii
+              \labelwidth\leftmarginii
+              \advance\labelwidth-\labelsep
+              \topsep  2\p@ \@plus 1\p@    \@minus 0.5\p@
+              \parsep  1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+              \itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep    1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+              \parsep    \z@
+              \partopsep 0.5\p@ \@plus 0\p@ \@minus 0.5\p@
+              \itemsep \topsep}
+\def\@listiv {\leftmargin\leftmarginiv
+              \labelwidth\leftmarginiv
+              \advance\labelwidth-\labelsep}
+\def\@listv  {\leftmargin\leftmarginv
+              \labelwidth\leftmarginv
+              \advance\labelwidth-\labelsep}
+\def\@listvi {\leftmargin\leftmarginvi
+              \labelwidth\leftmarginvi
+              \advance\labelwidth-\labelsep}
+
+%
+% Institution
+%
+
+\newcounter{inst} % Institution counter
+\newcounter{auth} % author counter
+\newdimen\instindent
+\newbox\authrun
+\newtoks\authorrunning
+\newbox\titrun
+\newtoks\titlerunning
+\let\@date\undefined
+\long\def\abstract#1{\gdef\@abstract
+{
+  {
+     \upshape \bfseries \normalsize \sffamily \abstractname} / #1
+     %\upshape \bfseries \normalsize \sffamily} #1 %ALTERNATIVE
+  }
+}
+
+% \long\def\resumen#1{\gdef\@resumen
+% {
+%   {
+%     \upshape \bfseries \normalsize \sffamily \resumenname} / #1
+%     %\upshape \bfseries \normalsize \sffamily} #1 %ALTERNATIVE
+%   }
+% }
+
+% Institution definition
+\def\institute#1{\gdef\@institute{#1}}
+% Institute names
+\def\institutename{\par
+ \begingroup
+ \small
+ \rmfamily
+ \itshape
+ \parindent=0pt
+ \parskip=0pt
+ \refstepcounter{inst}
+ \def\and{\par\refstepcounter{inst}
+ \hangindent\instindent
+ \noindent
+ \hbox to\instindent{\hss$^{\theinst}$\enspace}\ignorespaces}%
+ %\setbox0=\vbox{\@institute}
+ % use thanks to annotate author email
+ \setbox0=\vbox{\def\thanks##1{}\@institute}
+ \ifnum\value{inst}>9\relax\setbox0=\hbox{$^{88}$\enspace}%
+                 \else\setbox0=\hbox{$^{8}$\enspace}\fi
+ \instindent=\wd0\relax
+ % \ifnum\value{inst}=1\relax
+ % \else
+   \setcounter{inst}{1}%
+   \hangindent\instindent
+   \noindent
+   \hbox to\instindent{\hss$^{\theinst}$\enspace}\ignorespaces
+ % \fi
+ \ignorespaces
+ \@institute\par
+ \endgroup}
+
+%
+% Affiliations
+%
+
+% Affiliation numbers
+\def\inst#1{\unskip$^{ \text{\tiny{#1}} }$}
+
+%
+% contact
+%
+
+\def\mail#1{\gdef\@mail{#1}}
+\def\@mail{}
+\def\contact#1{\gdef\@contact{#1}}
+\def\@contact{}
+ 
+\def\contactline{\par
+\begingroup
+  \small
+  \rmfamily
+  \itshape
+  \ignorespaces
+  \normalfont\href{mailto:\@contact}{\hspace{1pt}\includesvg[scale=0.038]{icons/mail.svg}\hspace{1mm}\@contact}\par
+\endgroup}
+
+%
+% Create title
+%
+
+% rules for title box at top of first page
+\newcommand{\@toptitlebar}{
+  \hrule height 2\p@
+  \vskip 0.25in
+  \vskip -\parskip%
+}
+\newcommand{\@bottomtitlebar}{
+  \vskip 0.25in
+  \vskip -\parskip
+  \hrule height 2\p@
+  \vskip 0.09in%
+}
+
+% Create title
+\providecommand{\@maketitle}{}
+\renewcommand{\@maketitle}{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \vskip 0.0in
+    % Header
+    \@toptitlebar
+    \centering
+    {\LARGE \textls{\@title}\par}
+    \@bottomtitlebar
+    \textsc{}\\
+    \vskip 0.0in
+    \def\And{%
+      \end{tabular}\hfil\linebreak[0]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+    }
+    \def\AND{%
+      \end{tabular}\hfil\linebreak[4]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+    }
+  }
+  % Print authors
+  \vskip 8pt
+  {\upshape \mdseries \rmfamily \noindent \ignorespaces \@author}
+  % Print affiliations
+  \vskip 8pt
+  \small \itshape
+  \institutename
+  % Print contact
+  \vskip 8pt
+  \small \itshape
+  \contactline
+  % Submission Date
+  % \scriptsize{Submitted: \today}
+}
+
+%
+% Abstract
+% 
+
+\renewenvironment{abstract}
+{
+  \vskip 16pt
+  \centerline
+  {\large \bfseries \scshape Abstract}
+  \vskip 8pt
+  \begin{quote}
+}
+{
+  \end{quote}
+  \vskip 16pt
+}
+
+\endinput
+% \NeedsTeXFormat{LaTeX2e}
+
+% \ProcessOptions\relax
+
+% % fonts
+% \renewcommand{\rmdefault}{ptm}
+% \renewcommand{\sfdefault}{phv}
+
+% % set page geometry
+% \usepackage[verbose=true,letterpaper]{geometry}
+% \AtBeginDocument{
+%   \newgeometry{
+%     textheight=9in,
+%     textwidth=6.5in,
+%     top=1in,
+%     headheight=14pt,
+%     headsep=25pt,
+%     footskip=30pt
+%   }
+% }
+
+% \widowpenalty=10000
+% \clubpenalty=10000
+% \flushbottom
+% \sloppy
+
+% \usepackage{fancyhdr}
+% \fancyhf{}
+% \pagestyle{fancy}
+% \renewcommand{\headrulewidth}{0pt}
+% \fancyheadoffset{0pt}
+% \rhead{\scshape} % Add \today arg to \rhead{} for date in header
+% \cfoot{\thepage}
+
+% %Handling Keywords
+% \def\keywordname{{\bfseries \emph Keywords}}%
+% \def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
+% \def\and{\ifhmode\unskip\nobreak\fi\ $\cdot$
+% }\noindent\keywordname\enspace\ignorespaces#1\par\vskip 28pt}}
+
+% % font sizes with reduced leading
+% \renewcommand{\normalsize}{%
+%   \@setfontsize\normalsize\@xpt\@xipt
+%   \abovedisplayskip      7\p@ \@plus 2\p@ \@minus 5\p@
+%   \abovedisplayshortskip \z@ \@plus 3\p@
+%   \belowdisplayskip      \abovedisplayskip
+%   \belowdisplayshortskip 4\p@ \@plus 3\p@ \@minus 3\p@
+% }
+% \normalsize
+% \renewcommand{\small}{%
+%   \@setfontsize\small\@ixpt\@xpt
+%   \abovedisplayskip      6\p@ \@plus 1.5\p@ \@minus 4\p@
+%   \abovedisplayshortskip \z@  \@plus 2\p@
+%   \belowdisplayskip      \abovedisplayskip
+%   \belowdisplayshortskip 3\p@ \@plus 2\p@   \@minus 2\p@
+% }
+% \renewcommand{\footnotesize}{\@setfontsize\footnotesize\@ixpt\@xpt}
+% \renewcommand{\scriptsize}{\@setfontsize\scriptsize\@viipt\@viiipt}
+% \renewcommand{\tiny}{\@setfontsize\tiny\@vipt\@viipt}
+% \renewcommand{\large}{\@setfontsize\large\@xiipt{14}}
+% \renewcommand{\Large}{\@setfontsize\Large\@xivpt{16}}
+% \renewcommand{\LARGE}{\@setfontsize\LARGE\@xviipt{20}}
+% \renewcommand{\huge}{\@setfontsize\huge\@xxpt{23}}
+% \renewcommand{\Huge}{\@setfontsize\Huge\@xxvpt{28}}
+
+% % sections with less space
+% \providecommand{\section}{}
+% \renewcommand{\section}{%
+%   \@startsection{section}{1}{\z@}%
+%                 {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
+%                 {\large\bf\raggedright}%
+% }
+% \providecommand{\subsection}{}
+% \renewcommand{\subsection}{%
+%   \@startsection{subsection}{2}{\z@}%
+%                 {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 0.8ex \@plus  0.2ex}%
+%                 {\normalsize\bf\raggedright}%
+% }
+% \providecommand{\subsubsection}{}
+% \renewcommand{\subsubsection}{%
+%   \@startsection{subsubsection}{3}{\z@}%
+%                 {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
+%                 { 0.5ex \@plus  0.2ex}%
+%                 {\normalsize\bf\raggedright}%
+% }
+% \providecommand{\paragraph}{}
+% \renewcommand{\paragraph}{%
+%   \@startsection{paragraph}{4}{\z@}%
+%                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+%                 {-1em}%
+%                 {\normalsize\bf}%
+% }
+% \providecommand{\subparagraph}{}
+% \renewcommand{\subparagraph}{%
+%   \@startsection{subparagraph}{5}{\z@}%
+%                 {1.5ex \@plus 0.5ex \@minus 0.2ex}%
+%                 {-1em}%
+%                 {\normalsize\bf}%
+% }
+% \providecommand{\subsubsubsection}{}
+% \renewcommand{\subsubsubsection}{%
+%   \vskip5pt{\noindent\normalsize\rm\raggedright}%
+% }
+
+% % float placement
+% \renewcommand{\topfraction      }{0.85}
+% \renewcommand{\bottomfraction   }{0.4}
+% \renewcommand{\textfraction     }{0.1}
+% \renewcommand{\floatpagefraction}{0.7}
+
+% \newlength{\@abovecaptionskip}\setlength{\@abovecaptionskip}{7\p@}
+% \newlength{\@belowcaptionskip}\setlength{\@belowcaptionskip}{\z@}
+
+% \setlength{\abovecaptionskip}{\@abovecaptionskip}
+% \setlength{\belowcaptionskip}{\@belowcaptionskip}
+
+% % swap above/belowcaptionskip lengths for tables
+% \renewenvironment{table}
+%   {\setlength{\abovecaptionskip}{\@belowcaptionskip}%
+%    \setlength{\belowcaptionskip}{\@abovecaptionskip}%
+%    \@float{table}}
+%   {\end@float}
+
+% % footnote formatting
+% \setlength{\footnotesep }{6.65\p@}
+% \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
+% \renewcommand{\footnoterule}{\kern-3\p@ \hrule width 12pc \kern 2.6\p@}
+% \setcounter{footnote}{0}
+
+% % paragraph formatting
+% \setlength{\parindent}{\z@}
+% \setlength{\parskip  }{5.5\p@}
+
+% % list formatting
+% \setlength{\topsep       }{4\p@ \@plus 1\p@   \@minus 2\p@}
+% \setlength{\partopsep    }{1\p@ \@plus 0.5\p@ \@minus 0.5\p@}
+% \setlength{\itemsep      }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+% \setlength{\parsep       }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
+% \setlength{\leftmargin   }{3pc}
+% \setlength{\leftmargini  }{\leftmargin}
+% \setlength{\leftmarginii }{2em}
+% \setlength{\leftmarginiii}{1.5em}
+% \setlength{\leftmarginiv }{1.0em}
+% \setlength{\leftmarginv  }{0.5em}
+% \def\@listi  {\leftmargin\leftmargini}
+% \def\@listii {\leftmargin\leftmarginii
+%               \labelwidth\leftmarginii
+%               \advance\labelwidth-\labelsep
+%               \topsep  2\p@ \@plus 1\p@    \@minus 0.5\p@
+%               \parsep  1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+%               \itemsep \parsep}
+% \def\@listiii{\leftmargin\leftmarginiii
+%               \labelwidth\leftmarginiii
+%               \advance\labelwidth-\labelsep
+%               \topsep    1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+%               \parsep    \z@
+%               \partopsep 0.5\p@ \@plus 0\p@ \@minus 0.5\p@
+%               \itemsep \topsep}
+% \def\@listiv {\leftmargin\leftmarginiv
+%               \labelwidth\leftmarginiv
+%               \advance\labelwidth-\labelsep}
+% \def\@listv  {\leftmargin\leftmarginv
+%               \labelwidth\leftmarginv
+%               \advance\labelwidth-\labelsep}
+% \def\@listvi {\leftmargin\leftmarginvi
+%               \labelwidth\leftmarginvi
+%               \advance\labelwidth-\labelsep}
+
+% %
+% % Institution
+% %
+
+% \newcounter{inst} % Institution counter
+% \newcounter{auth} % author counter
+% \newdimen\instindent
+% \newbox\authrun
+% \newtoks\authorrunning
+% \newbox\titrun
+% \newtoks\titlerunning
+% \let\@date\undefined
+% \long\def\abstract#1{\gdef\@abstract
+% {
+%   {
+%      \upshape \bfseries \normalsize \sffamily \abstractname} / #1
+%      %\upshape \bfseries \normalsize \sffamily} #1 %ALTERNATIVE
+%   }
+% }
+
+% % \long\def\resumen#1{\gdef\@resumen
+% % {
+% %   {
+% %     \upshape \bfseries \normalsize \sffamily \resumenname} / #1
+% %     %\upshape \bfseries \normalsize \sffamily} #1 %ALTERNATIVE
+% %   }
+% % }
+
+% % Institution definition
+% \def\institute#1{\gdef\@institute{#1}}
+% % Institute names
+% \def\institutename{\par
+%  \begingroup
+%  \small
+%  \rmfamily
+%  \itshape
+%  \parindent=0pt
+%  \parskip=0pt
+%  \refstepcounter{inst}
+%  \def\and{\par\refstepcounter{inst}
+%  \hangindent\instindent
+%  \noindent
+%  \hbox to\instindent{\hss$^{\theinst}$\enspace}\ignorespaces}%
+%  %\setbox0=\vbox{\@institute}
+%  % use thanks to annotate author email
+%  \setbox0=\vbox{\def\thanks##1{}\@institute}
+%  \ifnum\value{inst}>9\relax\setbox0=\hbox{$^{88}$\enspace}%
+%                  \else\setbox0=\hbox{$^{8}$\enspace}\fi
+%  \instindent=\wd0\relax
+%  % \ifnum\value{inst}=1\relax
+%  % \else
+%    \setcounter{inst}{1}%
+%    \hangindent\instindent
+%    \noindent
+%    \hbox to\instindent{\hss$^{\theinst}$\enspace}\ignorespaces
+%  % \fi
+%  \ignorespaces
+%  \@institute\par
+%  \endgroup}
+
+% %
+% % Affiliations
+% %
+
+% % Affiliation numbers
+% \def\inst#1{\unskip$^{ \text{\tiny{#1}} }$}
+
+% %
+% % contact
+% %
+
+% \def\mail#1{\gdef\@mail{#1}}
+% \def\@mail{}
+% \def\contact#1{\gdef\@contact{#1}}
+% \def\@contact{}
+ 
+% \def\contactline{\par
+% \begingroup
+%   \small
+%   \rmfamily
+%   \itshape
+%   \ignorespaces
+%   \normalfont\href{mailto:\@contact}{\hspace{1pt}\includesvg[scale=0.038]{icons/mail.svg}\hspace{1mm}\@contact}\par
+% \endgroup}
+
+% %
+% % Create title
+% %
+
+% % rules for title box at top of first page
+% \newcommand{\@toptitlebar}{
+%   \hrule height 2\p@
+%   \vskip 0.25in
+%   \vskip -\parskip%
+% }
+% \newcommand{\@bottomtitlebar}{
+%   \vskip 0.25in
+%   \vskip -\parskip
+%   \hrule height 2\p@
+%   \vskip 0.09in%
+% }
+
+% % Create title
+% \providecommand{\@maketitle}{}
+% \renewcommand{\@maketitle}{%
+%   \vbox{%
+%     \hsize\textwidth
+%     \linewidth\hsize
+%     \vskip 0.0in
+%     % Header
+%     \@toptitlebar
+%     \centering
+%     {\LARGE \textls{\@title}\par}
+%     \@bottomtitlebar
+%     \textsc{}\\
+%     \vskip 0.0in
+%     \def\And{%
+%       \end{tabular}\hfil\linebreak[0]\hfil%
+%       \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+%     }
+%     \def\AND{%
+%       \end{tabular}\hfil\linebreak[4]\hfil%
+%       \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+%     }
+%   }
+%   % Print authors
+%   \vskip 8pt
+%   {\upshape \mdseries \rmfamily \noindent \ignorespaces \@author}
+%   % Print affiliations
+%   \vskip 8pt
+%   \small \itshape
+%   \institutename
+%   % Print contact
+%   \vskip 8pt
+%   \small \itshape
+%   \contactline
+%   % Submission Date
+%   % \scriptsize{Submitted: \today}
+% }
+
+% %
+% % Abstract
+% % 
+
+% \renewenvironment{abstract}
+% {
+%   \vskip 16pt
+%   \centerline
+%   {\large \bfseries \scshape Abstract}
+%   \vskip 8pt
+%   \begin{quote}
+% }
+% {
+%   \end{quote}
+%   \vskip 16pt
+% }
+
+% \endinput
